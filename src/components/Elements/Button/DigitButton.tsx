@@ -1,11 +1,24 @@
 import CalculatorButton from "./CalculatorButton";
+import { useCalculatorDispatch } from "../../../hooks/CalculatorProvider";
 
 type DigitButtonProps = {
-  digit: number;
+  digit: string;
 };
 
 function DigitButton({ digit }: DigitButtonProps) {
-  return <CalculatorButton content={digit.toString()} />;
+  const dispatch = useCalculatorDispatch();
+
+  return (
+    <CalculatorButton
+      content={digit}
+      onBtnClick={() => {
+        dispatch({
+          type: "changed_input",
+          payload: digit,
+        });
+      }}
+    />
+  );
 }
 
 export default DigitButton;

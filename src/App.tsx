@@ -1,4 +1,3 @@
-import { useState } from "react";
 import CalculatorBody from "./components/Calculator/CalculatorBody";
 import CenteredLayout from "./components/Layout/CenteredLayout";
 import "./App.css";

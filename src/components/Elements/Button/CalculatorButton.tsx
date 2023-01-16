@@ -1,5 +1,6 @@
 type CalculatorButtonProps = {
   content: string;
+  onBtnClick?: () => void;
   customStyle?: object;
 };
 
@@ -11,14 +12,20 @@ const DEFAULT_STYLE: object = {
   fontSize: "18px",
 };
 
-function CalculatorButton({ content, customStyle }: CalculatorButtonProps) {
+function CalculatorButton({
+  content,
+  onBtnClick,
+  customStyle,
+}: CalculatorButtonProps) {
   const buttonStyle = customStyle
     ? { ...DEFAULT_STYLE, ...customStyle }
     : DEFAULT_STYLE;
 
   return (
     <>
-      <button style={buttonStyle}>{content}</button>
+      <button style={buttonStyle} onClick={onBtnClick}>
+        {content}
+      </button>
     </>
   );
 }

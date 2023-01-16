@@ -1,5 +1,9 @@
+import { useCalculator } from "../../hooks/CalculatorProvider";
+
 function CalculatorScreen() {
-  return <div className="calculator-screen"></div>;
+  const calculator = useCalculator();
+
+  return <div className="calculator-screen">{calculator.input}</div>;
 }
 
 export default CalculatorScreen;
