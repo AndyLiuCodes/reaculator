@@ -1,0 +1,9 @@
+.calculator-screen {
+  background-color: #e6e2dd;
+  grid-column: span 3;
+  grid-row: span 1;
+  margin: 20px 20px 10px 20px;
+  overflow: auto;
+  text-align: right;
+  padding: 5px 20px;
+}

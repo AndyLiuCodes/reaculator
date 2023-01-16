@@ -6,9 +6,9 @@ function CalculatorButtons() {
   return (
     <div className="calculator-buttons">
       <OperationButton operation={"%"} />
-      <OperationButton operation={"CE"} />
-      <OperationButton operation={"C"} />
-      <OperationButton operation={"DEL"} />
+      <OperationButton operation={"CE"} opKey={"clear_entry"} />
+      <OperationButton operation={"C"} opKey={"clear"} />
+      <OperationButton operation={"DEL"} opKey={"delete"} />
 
       <OperationButton operation={"1/x"} />
       <OperationButton operation={"x²"} />
@@ -28,7 +28,7 @@ function CalculatorButtons() {
       <DigitButton digit={"1"} />
       <DigitButton digit={"2"} />
       <DigitButton digit={"3"} />
-      <OperationButton operation={"+"} />
+      <OperationButton operation={"+"} opKey={"add"} />
 
       <OperationButton operation={"+/-"} />
       <DigitButton digit={"0"} />

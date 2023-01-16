@@ -6,11 +6,9 @@
   grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
 }
 
-@media (max-width: 1920px) {
-  .calculator-body {
-    width: 500px;
-    height: 700px;
-  }
+.calculator-body {
+  width: 500px;
+  height: 700px;
 }
 
 @media (max-width: 1200px) {
@@ -25,13 +23,6 @@
     width: 300px;
     height: 500px;
   }
-}
-
-.calculator-screen {
-  background-color: #e6e2dd;
-  grid-column: span 3;
-  grid-row: span 1;
-  margin: 20px 20px 10px 20px;
 }
 
 .calculator-buttons {
