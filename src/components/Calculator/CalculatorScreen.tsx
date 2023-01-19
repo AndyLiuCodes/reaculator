@@ -33,6 +33,12 @@ function CalculatorScreen() {
 function translateSymbol(symbolKey: string) {
   if (symbolKey === "add") {
     return "+";
+  } else if (symbolKey === "subtract") {
+    return "-";
+  } else if (symbolKey === "multiply") {
+    return "×";
+  } else if (symbolKey === "divide") {
+    return "/";
   }
 
   return "";

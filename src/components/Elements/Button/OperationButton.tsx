@@ -4,13 +4,19 @@ import { useCalculatorDispatch } from "../../../hooks/CalculatorProvider";
 type OperationButtonProp = {
   operation: string;
   opKey?: string;
+  customStyle?: object;
 };
 
-function OperationButton({ operation, opKey }: OperationButtonProp) {
+function OperationButton({
+  operation,
+  opKey,
+  customStyle,
+}: OperationButtonProp) {
   return (
     <CalculatorButton
       content={operation}
       onBtnClick={operationDispatch(opKey)}
+      customStyle={customStyle}
     />
   );
 }
@@ -23,6 +29,54 @@ function operationDispatch(operation?: string) {
       return () => {
         dispatch({
           type: "add",
+          payload: "",
+        });
+      };
+    }
+    case "subtract": {
+      return () => {
+        dispatch({
+          type: "subtract",
+          payload: "",
+        });
+      };
+    }
+    case "multiply": {
+      return () => {
+        dispatch({
+          type: "multiply",
+          payload: "",
+        });
+      };
+    }
+    case "divide": {
+      return () => {
+        dispatch({
+          type: "divide",
+          payload: "",
+        });
+      };
+    }
+    case "equals": {
+      return () => {
+        dispatch({
+          type: "equals",
+          payload: "",
+        });
+      };
+    }
+    case "sign": {
+      return () => {
+        dispatch({
+          type: "sign",
+          payload: "",
+        });
+      };
+    }
+    case "decimal": {
+      return () => {
+        dispatch({
+          type: "decimal",
           payload: "",
         });
       };
