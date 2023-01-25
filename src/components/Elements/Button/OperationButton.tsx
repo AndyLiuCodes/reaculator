@@ -57,6 +57,38 @@ function operationDispatch(operation?: string) {
         });
       };
     }
+    case "sqrt": {
+      return () => {
+        dispatch({
+          type: "sqrt",
+          payload: "",
+        });
+      };
+    }
+    case "squared": {
+      return () => {
+        dispatch({
+          type: "squared",
+          payload: "",
+        });
+      };
+    }
+    case "multi_inverse": {
+      return () => {
+        dispatch({
+          type: "multi_inverse",
+          payload: "",
+        });
+      };
+    }
+    case "percent": {
+      return () => {
+        dispatch({
+          type: "percent",
+          payload: "",
+        });
+      };
+    }
     case "equals": {
       return () => {
         dispatch({

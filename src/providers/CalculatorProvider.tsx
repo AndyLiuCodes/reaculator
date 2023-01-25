@@ -19,6 +19,7 @@ interface CalculatorState {
   total: number;
   operation: string;
   input: string;
+  clearInput: boolean;
 }
 
 interface CalculatorAction {
@@ -77,6 +78,7 @@ function calculatorReducer(
         total: nextTotal,
         operation: "add",
         input: INITIAL_INPUT,
+        clearInput: false,
       };
     }
     case "subtract": {
@@ -84,6 +86,7 @@ function calculatorReducer(
         total: nextTotal,
         operation: "subtract",
         input: INITIAL_INPUT,
+        clearInput: false,
       };
     }
     case "multiply": {
@@ -91,17 +94,15 @@ function calculatorReducer(
         total: nextTotal,
         operation: "multiply",
         input: INITIAL_INPUT,
+        clearInput: false,
       };
     }
     case "divide": {
-      if (currentInputNumber === 0) {
-        return initialCalculatorState;
-      }
-
       return {
         total: nextTotal,
         operation: "divide",
         input: INITIAL_INPUT,
+        clearInput: false,
       };
     }
     case "equals": {
@@ -109,15 +110,45 @@ function calculatorReducer(
         total: nextTotal,
         operation: INITIAL_OPERATION,
         input: nextTotal.toString(),
+        clearInput: true,
       };
     }
     case "sqrt": {
+      if (currentInputNumber < 0) {
+        alert("You cannot square root a negative number");
+        return initialCalculatorState;
+      }
+      return {
+        ...calculator,
+        input: Math.sqrt(currentInputNumber).toString(),
+        clearInput: true,
+      };
     }
     case "squared": {
+      return {
+        ...calculator,
+        input: Math.pow(currentInputNumber, 2).toString(),
+        clearInput: true,
+      };
     }
     case "multi_inverse": {
+      if (currentInputNumber === 0) {
+        alert("You cannot divide by 0");
+        return initialCalculatorState;
+      }
+
+      return {
+        ...calculator,
+        input: (1 / currentInputNumber).toString(),
+        clearInput: true,
+      };
     }
     case "percent": {
+      return {
+        ...calculator,
+        input: ((calculator.total * currentInputNumber) / 100).toString(),
+        clearInput: true,
+      };
     }
     case "decimal": {
       let nextInput;
@@ -135,8 +166,7 @@ function calculatorReducer(
       };
     }
     case "sign": {
-      let toAddNegSign =
-        !(calculator.input === "0") || calculator.input[0] === "-";
+      let toAddNegSign = Math.sign(currentInputNumber) === 1;
 
       return {
         ...calculator,
@@ -148,13 +178,16 @@ function calculatorReducer(
     case "changed_input": {
       let result;
 
-      if (currentInputString.length >= MAX_INPUT_SIZE) {
+      if (
+        currentInputString.length >= MAX_INPUT_SIZE &&
+        !calculator.clearInput
+      ) {
         return calculator;
       }
 
       if (currentInputString === INITIAL_INPUT && digit === "0") {
         result = "0";
-      } else if (currentInputString === "0") {
+      } else if (currentInputString === "0" || calculator.clearInput) {
         result = action.payload;
       } else {
         result = currentInputString + action.payload;
@@ -163,6 +196,7 @@ function calculatorReducer(
       return {
         ...calculator,
         input: result,
+        clearInput: false,
       };
     }
     case "deleted_input": {

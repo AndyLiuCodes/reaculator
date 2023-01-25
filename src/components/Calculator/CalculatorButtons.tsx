@@ -4,14 +4,14 @@ import OperationButton from "../Elements/Button/OperationButton";
 function CalculatorButtons() {
   return (
     <div className="calculator-buttons">
-      <OperationButton operation={"%"} />
+      <OperationButton operation={"%"} opKey={"percent"} />
       <OperationButton operation={"CE"} opKey={"clear_entry"} />
       <OperationButton operation={"C"} opKey={"clear"} />
       <OperationButton operation={"DEL"} opKey={"delete"} />
 
-      <OperationButton operation={"1/x"} />
-      <OperationButton operation={"x²"} />
-      <OperationButton operation={"√"} />
+      <OperationButton operation={"1/x"} opKey={"multi_inverse"} />
+      <OperationButton operation={"x²"} opKey={"squared"} />
+      <OperationButton operation={"√"} opKey={"sqrt"} />
       <OperationButton operation={"÷"} opKey={"divide"} />
 
       <DigitButton digit={"7"} />
