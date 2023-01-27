@@ -1,4 +1,5 @@
-import { useReducer, createContext, Dispatch, useContext } from "react";
+import { useReducer, createContext, Dispatch } from "react";
+import * as OperationConstants from "../constants/DispatchOperationKeys";
 
 const MAX_INPUT_SIZE = 16;
 const INITIAL_INPUT = "0";
@@ -9,6 +10,7 @@ const initialCalculatorState = {
   total: INITIAL_TOTAL,
   operation: INITIAL_OPERATION,
   input: INITIAL_INPUT,
+  clearInput: false,
 };
 
 type CalculatorProviderProp = {
@@ -60,11 +62,11 @@ function calculatorReducer(
     calculator.operation === initialCalculatorState.operation &&
     calculator.total === initialCalculatorState.total;
   const isCalculationRequired =
-    action.type === "add" ||
-    action.type === "subtract" ||
-    action.type === "multiply" ||
-    action.type === "divide" ||
-    action.type === "equals";
+    action.type === OperationConstants.ADD ||
+    action.type === OperationConstants.SUBTRACT ||
+    action.type === OperationConstants.MULTIPLY ||
+    action.type === OperationConstants.DIVIDE ||
+    action.type === OperationConstants.EQUALS;
 
   let nextTotal = isFirstInput
     ? currentInputNumber
@@ -73,39 +75,39 @@ function calculatorReducer(
     : currentInputNumber;
 
   switch (action.type) {
-    case "add": {
+    case OperationConstants.ADD: {
       return {
         total: nextTotal,
-        operation: "add",
+        operation: action.type,
         input: INITIAL_INPUT,
         clearInput: false,
       };
     }
-    case "subtract": {
+    case OperationConstants.SUBTRACT: {
       return {
         total: nextTotal,
-        operation: "subtract",
+        operation: action.type,
         input: INITIAL_INPUT,
         clearInput: false,
       };
     }
-    case "multiply": {
+    case OperationConstants.MULTIPLY: {
       return {
         total: nextTotal,
-        operation: "multiply",
+        operation: action.type,
         input: INITIAL_INPUT,
         clearInput: false,
       };
     }
-    case "divide": {
+    case OperationConstants.DIVIDE: {
       return {
         total: nextTotal,
-        operation: "divide",
+        operation: action.type,
         input: INITIAL_INPUT,
         clearInput: false,
       };
     }
-    case "equals": {
+    case OperationConstants.EQUALS: {
       return {
         total: nextTotal,
         operation: INITIAL_OPERATION,
@@ -113,7 +115,7 @@ function calculatorReducer(
         clearInput: true,
       };
     }
-    case "sqrt": {
+    case OperationConstants.SQRT: {
       if (currentInputNumber < 0) {
         alert("You cannot square root a negative number");
         return initialCalculatorState;
@@ -124,14 +126,14 @@ function calculatorReducer(
         clearInput: true,
       };
     }
-    case "squared": {
+    case OperationConstants.SQUARED: {
       return {
         ...calculator,
         input: Math.pow(currentInputNumber, 2).toString(),
         clearInput: true,
       };
     }
-    case "multi_inverse": {
+    case OperationConstants.MULTI_INVERSE: {
       if (currentInputNumber === 0) {
         alert("You cannot divide by 0");
         return initialCalculatorState;
@@ -143,14 +145,14 @@ function calculatorReducer(
         clearInput: true,
       };
     }
-    case "percent": {
+    case OperationConstants.PERCENT: {
       return {
         ...calculator,
         input: ((calculator.total * currentInputNumber) / 100).toString(),
         clearInput: true,
       };
     }
-    case "decimal": {
+    case OperationConstants.DECIMAL: {
       let nextInput;
       if (currentInputString[currentInputString.length - 1] === ".") {
         nextInput = currentInputString.slice(0, -1);
@@ -165,7 +167,7 @@ function calculatorReducer(
         input: nextInput,
       };
     }
-    case "sign": {
+    case OperationConstants.SIGN: {
       let toAddNegSign = Math.sign(currentInputNumber) === 1;
 
       return {
@@ -175,7 +177,7 @@ function calculatorReducer(
           : Math.abs(currentInputNumber).toString(),
       };
     }
-    case "changed_input": {
+    case OperationConstants.CHANGED_INPUT: {
       let result;
 
       if (
@@ -199,7 +201,7 @@ function calculatorReducer(
         clearInput: false,
       };
     }
-    case "deleted_input": {
+    case OperationConstants.DELETE: {
       if (currentInputString.length === 1) {
         return {
           ...calculator,
@@ -212,10 +214,10 @@ function calculatorReducer(
         input: currentInputString.slice(0, -1),
       };
     }
-    case "clear": {
+    case OperationConstants.CLEAR: {
       return initialCalculatorState;
     }
-    case "clear_entry": {
+    case OperationConstants.CLEAR_ENTRY: {
       return {
         ...calculator,
         input: INITIAL_INPUT,
@@ -231,16 +233,16 @@ function computePending(state: CalculatorState) {
   if (state.operation === "") return state.total;
   const currentInputValue = parseFloat(state.input);
   switch (state.operation) {
-    case "add": {
+    case OperationConstants.ADD: {
       return state.total + currentInputValue;
     }
-    case "subtract": {
+    case OperationConstants.SUBTRACT: {
       return state.total - currentInputValue;
     }
-    case "multiply": {
+    case OperationConstants.MULTIPLY: {
       return state.total * currentInputValue;
     }
-    case "divide": {
+    case OperationConstants.DIVIDE: {
       if (currentInputValue === 0) {
         alert("You cannot divide by 0");
         return 0;

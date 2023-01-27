@@ -1,5 +1,16 @@
 import CalculatorButton from "./CalculatorButton";
 import { useCalculatorDispatch } from "../../../hooks/CalculatorProvider";
+import * as OperationConstants from "../../../constants/DispatchOperationKeys";
+import {
+  ADD,
+  CLEAR,
+  CLEAR_ENTRY,
+  DECIMAL,
+  DELETE,
+  EQUALS,
+  SIGN,
+  SUBTRACT,
+} from "../../../constants/DispatchOperationKeys";
 
 type OperationButtonProp = {
   operation: string;
@@ -25,114 +36,114 @@ function operationDispatch(operation?: string) {
   const dispatch = useCalculatorDispatch();
 
   switch (operation) {
-    case "add": {
+    case OperationConstants.ADD: {
       return () => {
         dispatch({
-          type: "add",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "subtract": {
+    case OperationConstants.SUBTRACT: {
       return () => {
         dispatch({
-          type: "subtract",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "multiply": {
+    case OperationConstants.MULTIPLY: {
       return () => {
         dispatch({
-          type: "multiply",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "divide": {
+    case OperationConstants.DIVIDE: {
       return () => {
         dispatch({
-          type: "divide",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "sqrt": {
+    case OperationConstants.SQRT: {
       return () => {
         dispatch({
-          type: "sqrt",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "squared": {
+    case OperationConstants.SQUARED: {
       return () => {
         dispatch({
-          type: "squared",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "multi_inverse": {
+    case OperationConstants.MULTI_INVERSE: {
       return () => {
         dispatch({
-          type: "multi_inverse",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "percent": {
+    case OperationConstants.PERCENT: {
       return () => {
         dispatch({
-          type: "percent",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "equals": {
+    case OperationConstants.SIGN: {
       return () => {
         dispatch({
-          type: "equals",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "sign": {
+    case OperationConstants.DECIMAL: {
       return () => {
         dispatch({
-          type: "sign",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "decimal": {
+    case OperationConstants.EQUALS: {
       return () => {
         dispatch({
-          type: "decimal",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "delete": {
+    case OperationConstants.DELETE: {
       return () => {
         dispatch({
-          type: "deleted_input",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "clear": {
+    case OperationConstants.CLEAR: {
       return () => {
         dispatch({
-          type: "clear",
+          type: operation,
           payload: "",
         });
       };
     }
-    case "clear_entry": {
+    case OperationConstants.CLEAR_ENTRY: {
       return () => {
         dispatch({
-          type: "clear_entry",
+          type: operation,
           payload: "",
         });
       };
